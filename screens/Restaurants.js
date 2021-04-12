@@ -6,7 +6,7 @@ import { StyleSheet, Text, View } from 'react-native'
 export default function Restaurants() {
     return (
         <View>
-            <Text>Restaurants</Text>
+            <Text>Restaurants Wiri</Text>
         </View>
     )
 }
