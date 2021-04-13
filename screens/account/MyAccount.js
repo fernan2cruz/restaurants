@@ -1,10 +1,12 @@
 import React, {useState} from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import firebase from 'firebase/app'
 import {firebaseApp} from '../../utils/firebase'
+require('firebase/auth')
 
 import UserGuest from './UserGuest'
 import UserLogged from './UserLogged'
+import Loading from '../../components/Loading'
 
 
 export default function MyAccount() {
@@ -12,11 +14,10 @@ export default function MyAccount() {
 
     firebase.auth().onAuthStateChanged((user)=>{
         user !== null ? setLogin(true) : setLogin(false)
-    })   
-    console.log(login)
+    })       
     if (login == null) {
         console.log("Loading...")
-        return <Text>Loading...</Text>
+        return <Loading isVisible={true} text="Loading..."/>
     }
 
     return login ? <UserLogged></UserLogged> : <UserGuest></UserGuest>
