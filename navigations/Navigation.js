@@ -1,6 +1,8 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { Icon } from 'react-native-elements'
+
 import RestaurantStack from './RestaurantStack'
 import AccountStack from './AccountStack'
 import FavoritesStack from './FavoritesStack'
@@ -12,14 +14,58 @@ import TopRestaurantStack from './TopRestaurantStack'
 const Tab = createBottomTabNavigator()
 
 export default function Navigation() {
+    const screenOption = (screen, color) => {
+        let iconName 
+
+        switch (screen.name) {
+            case "restaurants":
+                iconName = "compass-outline"
+                break;
+            case "favorites":
+                iconName = "heart-outline"
+                break;
+            case "top-restaurants":
+                iconName = "align-vertical-top"
+                break;
+            case "search":
+                iconName = "glasses"
+                break;
+            case "account":
+                iconName = "account-cog-outline"
+                break;
+        
+            default:
+                break;
+        }
+        return (
+            <Icon
+                type="material-community"
+                name={iconName}
+                size={22}
+                color={color}
+            />
+        )
+        
+    }
+
     return (
         <NavigationContainer>
             
-            <Tab.Navigator>
+            <Tab.Navigator
+                initialRouteName="restaurants"
+                //{{}} Esto es para los objetos
+                tabBarOptions={{
+                    inactiveTintColor:"#a17dc3",
+                    activeTintColor:"#442484"
+                }}
+                screenOptions={({route})=>({
+                    tabBarIcon: ({ color }) => screenOption(route, color)
+                })}
+            >
                 <Tab.Screen
                     name="restaurants"
                     component={RestaurantStack}
-                    options={{ title: "Restaurants"}}
+                    options={{ title: "Restaurants"}}                    
                 ></Tab.Screen>
                 <Tab.Screen
                     name="favorites"
