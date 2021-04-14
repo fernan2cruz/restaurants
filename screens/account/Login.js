@@ -1,8 +1,11 @@
 import React from 'react'
 import { ScrollView ,StyleSheet, Text, View, Image } from 'react-native'
 import { Divider } from 'react-native-elements'
+import { useNavigation } from '@react-navigation/native'
 
 export default function Login() {
+    
+
     return (
         <ScrollView>
             <Image
@@ -22,10 +25,11 @@ export default function Login() {
 }
 
 function CreateAccount(props){
+    const navigation = useNavigation();
     return(
         <Text 
             style={styles.register}
-            onPress={()=> console.log("Sign Up")}
+            onPress={()=> navigation.navigate("signup")}
         >
             Dont have an Account?{" "}
             <Text style={styles.btnRegister}>Sign Up</Text>
@@ -55,8 +59,7 @@ const styles = StyleSheet.create({
         alignSelf:"center"
 
     },
-    btnRegister:{
-        width: 50,
+    btnRegister:{        
         color:"#442484",
         fontWeight:"bold"
     }
